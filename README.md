@@ -59,42 +59,79 @@ Este projeto ingere todos os personagens da [Star Wars API (SWAPI)](https://swap
  └── 📄 README.md
 ```
 
-## Pré-requisitos
+## Primeiros Passos (do zero ao funcionando)
+
+### 1. Pré-requisitos
 
 - Python **3.10+**
-- Databricks CLI configurado
-- Conta no Databricks (workspace GCP)
+- [Databricks CLI](https://docs.databricks.com/en/dev-tools/cli/install.html) instalado
+- Acesso a um workspace Databricks com Unity Catalog
 
-## Instalação
+### 2. Clone e instale as dependências
 
 ```bash
-# Clone o repositório
 git clone https://github.com/wendermezin/databricks-swapi-pipeline.git
 cd databricks-swapi-pipeline
 
-# Instale as dependências
 pip install databricks-connect==15.4.* python-dotenv requests
-
-# Configure as variáveis de ambiente
-cp .env.example .env
-# Edite .env com seu profile do Databricks
 ```
 
-## Configuração
+### 3. Autentique no Databricks
 
-No arquivo `.env`:
-
-```env
-DATABRICKS_CONFIG_PROFILE=seu_profile_aqui
+```bash
+databricks configure
 ```
 
-Verifique seus perfis disponíveis:
+Informe a URL do seu workspace e o token de acesso. Para ver os perfis configurados:
 
 ```bash
 databricks auth profiles
 ```
 
-## Como Rodar
+### 4. Configure as variáveis de ambiente
+
+```bash
+cp .env.example .env
+```
+
+Edite o `.env` com o nome do seu perfil:
+
+```env
+DATABRICKS_CONFIG_PROFILE=nome_do_seu_profile
+```
+
+### 5. Crie os objetos no Databricks
+
+Execute os comandos abaixo no Databricks SQL Editor ou via CLI:
+
+```sql
+CREATE CATALOG IF NOT EXISTS star_wars_api_wender;
+
+CREATE SCHEMA IF NOT EXISTS star_wars_api_wender.landing;
+
+CREATE TABLE IF NOT EXISTS star_wars_api_wender.landing.characters (
+  name       STRING,
+  height     STRING,
+  mass       STRING,
+  birth_year STRING,
+  homeworld  STRING
+);
+```
+
+### 6. Execute o pipeline
+
+```bash
+python pipelines/swapi_characters/swapi_local.py
+```
+
+### 7. Verifique os dados
+
+```sql
+SELECT * FROM star_wars_api_wender.landing.characters ORDER BY name;
+SELECT COUNT(*) AS total FROM star_wars_api_wender.landing.characters;
+```
+
+## Como Rodar (execuções seguintes)
 
 ```bash
 python pipelines/swapi_characters/swapi_local.py
