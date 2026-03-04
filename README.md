@@ -4,9 +4,9 @@
 
 # Databricks SWAPI Pipeline
 
-**Pipeline de ingestão de personagens Star Wars no Databricks**
+**Construído com Databricks AI DEV KIT + Claude Code + MCP**
 
-*Construído com Databricks AI DEV KIT + Claude Code*
+*Pipeline de ingestão de personagens Star Wars no Databricks*
 
 [![Python](https://img.shields.io/badge/Python-3.10+-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://python.org)
 [![Databricks](https://img.shields.io/badge/Databricks-Connect-FF3621?style=for-the-badge&logo=databricks&logoColor=white)](https://databricks.com)
