@@ -8,7 +8,9 @@ load_dotenv()
 
 # Conecta ao workspace via Databricks Connect
 # Configure DATABRICKS_CONFIG_PROFILE no arquivo .env
-profile = os.getenv("DATABRICKS_CONFIG_PROFILE", "3596016397358328")
+profile = os.getenv("DATABRICKS_CONFIG_PROFILE")
+if not profile:
+    raise EnvironmentError("DATABRICKS_CONFIG_PROFILE não definido. Configure o arquivo .env.")
 spark = DatabricksSession.builder.profile(profile).serverless(True).getOrCreate()
 
 TARGET_TABLE = "star_wars_api_wender.landing.characters"
