@@ -1,7 +1,5 @@
 <div align="center">
 
-<img src="https://avatars.githubusercontent.com/u/17349883" width="80" alt="Databricks" />
-&nbsp;&nbsp;&nbsp;
 <img src="https://avatars.githubusercontent.com/u/76263028" width="80" alt="Anthropic Claude" />
 
 # Databricks SWAPI Pipeline
